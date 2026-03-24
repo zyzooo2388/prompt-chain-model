@@ -1,26 +1,67 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --app-background: #f3eee2;
+  --app-foreground: #1f1b16;
+  --admin-surface: rgba(255, 252, 247, 0.88);
+  --admin-surface-strong: rgba(255, 248, 238, 0.96);
+  --admin-border: rgba(126, 103, 74, 0.24);
+  --admin-muted: #6f6254;
+  --admin-foreground: #1f1b16;
+  --admin-accent: #bd5f2d;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --color-background: var(--app-background);
+  --color-foreground: var(--app-foreground);
+  --font-sans: "Avenir Next", "Segoe UI", sans-serif;
+  --font-serif: "Iowan Old Style", "Palatino Linotype", serif;
   --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 }
 
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --app-background: #16120e;
+  --app-foreground: #f4ede2;
+  --admin-surface: rgba(33, 27, 22, 0.92);
+  --admin-surface-strong: rgba(43, 35, 29, 0.96);
+  --admin-border: rgba(226, 207, 183, 0.12);
+  --admin-muted: #c2b29d;
+  --admin-foreground: #f4ede2;
+  --admin-accent: #d46d34;
+}
+
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --app-background: #16120e;
+    --app-foreground: #f4ede2;
+    --admin-surface: rgba(33, 27, 22, 0.92);
+    --admin-surface-strong: rgba(43, 35, 29, 0.96);
+    --admin-border: rgba(226, 207, 183, 0.12);
+    --admin-muted: #c2b29d;
+    --admin-foreground: #f4ede2;
+    --admin-accent: #d46d34;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background:
+    radial-gradient(circle at top left, rgba(210, 127, 58, 0.12), transparent 32%),
+    linear-gradient(180deg, var(--app-background) 0%, color-mix(in srgb, var(--app-background) 85%, #000 15%) 100%);
+  color: var(--app-foreground);
   font-family: var(--font-sans);
+}
+
+::selection {
+  background: color-mix(in srgb, var(--admin-accent) 28%, white 72%);
+  color: var(--admin-foreground);
+}
+
+[data-theme="dark"] ::selection {
+  background: color-mix(in srgb, var(--admin-accent) 38%, black 62%);
 }
