@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
-import { supabase } from "@/src/lib/supabase";
+import { createSupabaseBrowserClient } from "@/src/lib/supabase/client";
 import { StatusMessage } from "@/src/components/ui/status-message";
 
 type HumorFlavorOption = {
@@ -40,6 +40,8 @@ const emptyForm: HumorFlavorStepFormValues = {
   prompt_text: "",
   is_active: true,
 };
+
+const supabase = createSupabaseBrowserClient();
 
 export function HumorFlavorStepManager() {
   const [steps, setSteps] = useState<HumorFlavorStep[]>([]);

@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
-import { supabase } from "@/src/lib/supabase";
+import { createSupabaseBrowserClient } from "@/src/lib/supabase/client";
 import { StatusMessage } from "@/src/components/ui/status-message";
 
 type HumorFlavor = {
@@ -22,6 +22,8 @@ const emptyForm: HumorFlavorFormValues = {
   description: "",
   is_active: true,
 };
+
+const supabase = createSupabaseBrowserClient();
 
 export function HumorFlavorManager() {
   const [flavors, setFlavors] = useState<HumorFlavor[]>([]);
